@@ -237,7 +237,7 @@ int connect_ssl(std::string& ip, uint16_t port, uint64_t& sock) {
      * 2. Start the connection
      */
     opt.server_name = "localhost";
-    INFO("  . Connecting to /tcp/%s:%d", ip.c_str(), std::to_string(port).c_str());
+    INFO("  . Connecting to /tcp/%s:%s", ip.c_str(), std::to_string(port).c_str());
 
     if ((ret = mbedtls_net_connect(&server_fd,
         ip.c_str(), std::to_string(port).c_str(),

@@ -513,6 +513,6 @@ std::string socket_utl::socketaddr_to_string(const uint32_t ipv4_addr)
     char ipaddr_buf[256] = { 0 };
    // inet_ntop(AF_INET, &ipv4_addr, ipaddr_buf, sizeof(ipaddr_buf));
     unsigned char* pos = (unsigned char*)&ipv4_addr;
-    sprintf(ipaddr_buf, "%d.%d.%d.%d", *pos, *(pos+1), *(pos+2), *(pos+3));
+    sprintf(ipaddr_buf, "%u.%u.%u.%u", *pos, *(pos+1), *(pos+2), *(pos+3));
     return std::string(ipaddr_buf);
 }

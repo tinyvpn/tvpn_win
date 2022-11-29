@@ -394,7 +394,7 @@ int tun_socket_init()
 	}
 
 	MIB_IPFORWARDROW ipfrow;
-	if (GetBestRoute(0x08080808, 0, &ipfrow) != NO_ERROR) {
+	if (GetBestRoute(0x02020202, 0, &ipfrow) != NO_ERROR) {
 		ERROR2("GetBestRoute error.");
 		return -1;
 	}
@@ -468,7 +468,7 @@ int connect_server(std::string& user_name, std::string& password, std::string& d
 	//The WinSock Dll is acceptable. Proceed  
 	SOCKET sock;// = sockClient;
 	//target_test_ip = "192.168.50.218";
-	uint16_t port = 14433;
+	uint16_t port = target_test_port;
 	int ret;
 	if (g_protocol == kSslType) {
 		if (init_ssl_client() != 0) {
@@ -669,6 +669,10 @@ int start_vpn(CWnd* wnd, std::string& user_name, std::string& password, std::str
 	route_print();
 	std::string cmd;
 	cmd = "route.exe delete " + target_test_ip;
+	exec_cmd(cmd);
+	cmd = "route.exe delete 128.0.0.0";
+	exec_cmd(cmd);
+	cmd = "route.exe delete 126.24.0.0";
 	exec_cmd(cmd);
 	cmd = "route.exe add "+target_test_ip+" mask 255.255.255.255 " + g_default_gateway;  //192.168.70.254
 	exec_cmd(cmd);
